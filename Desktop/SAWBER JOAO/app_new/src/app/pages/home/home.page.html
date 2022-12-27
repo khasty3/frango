@@ -1,0 +1,122 @@
+<!--<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title slot="end">
+      <img src="assets/media/logo.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+-->
+<div class="header" >
+  <ion-buttons slot="start">
+    <ion-menu-button style="color:white;" ></ion-menu-button>
+    <img src="assets/media/logo.png" style="/* width: 150px; */margin-left: 9%;">
+  </ion-buttons>
+ 
+</div>
+<ion-content color="primary" class="ion-padding" >
+  <div  class="ion-margsin-top" style="margin-top: 5px;margin-left: 26px;">
+    <div>
+      <strong style="color: rgb(224, 109, 14);font-size: initial;font-weight: 500;" class="font-md">Olá {{user.nome}}</strong>
+    </div>
+    <div>
+      <strong style="color: rgb(24, 23, 23);font-size: large;" class="font-md">O que deseja fazer?</strong>
+    </div>
+
+  </div>
+
+
+  <div class="ion-padding" style="
+  margin-top: 0px;
+">
+
+    <!--<div align="center">
+      <strong class="font-md">Informe o que precisa</strong>
+    </div>-->
+
+ 
+  
+    <ion-card  button color="tertiary" class="ion-margin-top" [routerLink]="[ '/coleta' ]" *ngIf="user.tipo == 0">
+
+      <div class="ion-padding" align="center">
+        <ion-icon name="archive-outline" class="font-lg"></ion-icon>
+        <div>
+          <strong class="">Coleta</strong>
+        </div>
+      </div>
+
+    </ion-card>
+
+    <ion-card button color="tertiary" class="ion-margin-top" *ngIf="user.tipo == 0" [routerLink]="[ '/malotes' ]">
+
+      <div class="ion-padding" align="center">
+        <ion-icon name="archive-outline" class="font-lg"></ion-icon>
+        <div>
+          <strong class="">Coleta Malote</strong>
+        </div>
+      </div>
+
+    </ion-card>
+
+    <ion-card button color="tertiary" class="ion-margin-top" *ngIf="user.tipo == 0" [routerLink]="[ '/entregas' ]">
+
+      <div class="ion-padding" align="center">
+        <ion-icon name="navigate-circle-outline" class="font-lg"></ion-icon>
+        <div>
+          <strong class="">Entrega</strong>
+        </div>
+      </div>
+
+    </ion-card>
+
+    <ion-card button color="tertiary" class="ion-margin-top" [routerLink]="[ '/coletas-check' ]" *ngIf="user.tipo == 1">
+
+      <div class="ion-padding" align="center">
+        <ion-icon name="navigate-circle-outline" class="font-lg"></ion-icon>
+        <div>
+          <strong class="">Coletas</strong>
+        </div>
+      </div>
+
+    </ion-card>
+  </div>
+
+  <div class="ion-padding" *ngIf="notifications.length > 0 && user.tipo == 0">
+    <ion-card button color="warning" class="ion-margin-top" [routerLink]="[ '/notifications' ]">
+
+      <div class="ion-padding" align="center">
+        <!-- <ion-icon name="archive-outline" class="font-lg"></ion-icon> -->
+        <strong class="font-md">{{notifications.length}}</strong>
+        <div>
+          <strong class="">Ocorrências</strong>
+        </div>
+      </div>
+
+    </ion-card>
+  </div>
+
+  <div class="ion-padding" *ngIf="coletas.length > 0 && user.tipo == 0">
+    <ion-card button color="danger" class="ion-margin-top" [routerLink]="[ '/coletas-pending' ]">
+
+      <div class="ion-padding" align="center">
+        <!-- <ion-icon name="archive-outline" class="font-lg"></ion-icon> -->
+        <strong class="font-md">{{coletas.length}}</strong>
+        <div>
+          <strong class="">Coletas Pendentes</strong>
+        </div>
+      </div>
+
+    </ion-card>
+  </div>
+
+  <div class="back2"></div>
+  <div class="back"></div>
+
+  <div align="center">
+    versão: {{nowBuild}}
+  </div>
+ 
+</ion-content>

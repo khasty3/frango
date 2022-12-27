@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-button (click)="close(changes)">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Itens Coletados</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card class="ion-margin-top" mode="ios">
+
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap" *ngIf="dados.nome">
+        <p>Médico:</p>
+        <h2>{{dados.nome}}</h2>
+      </ion-label>
+      <ion-label class="ion-text-wrap" *ngIf="!dados.nome">
+        <h2>Ocorrências</h2>
+      </ion-label>
+    </ion-item>
+
+  </ion-card>
+
+  <ion-card class="ion-margin-top" *ngFor="let item of dados.itens; let i = index" mode="ios">
+    <img [src]="item.foto">
+    <ion-card-header *ngIf="item.tipo_exame">
+      <ion-card-subtitle>Tipo: {{ item.tipo_exame.nome | titlecase }}</ion-card-subtitle>
+
+      <ion-badge color="medium" *ngIf="item.status == 1">Pendente</ion-badge>
+      <ion-badge color="warning" *ngIf="item.status == 5">Ocorrência</ion-badge>
+      <ion-badge color="success" *ngIf="item.status == 10">Verificado</ion-badge>
+
+      <p><strong>Ocorrência:</strong> {{item.description}}</p>
+
+    </ion-card-header>
+
+    <ion-row *ngIf="item.status != 10">
+      <ion-col>
+        <ion-button color="success" expand="block" (click)="checkSuccess(item, i)">
+          <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col *ngIf="item.status == 1">
+        <ion-button color="warning" expand="block" (click)="genOcorrencia(item, i)">
+          <ion-icon slot="icon-only" name="alert-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+</ion-content>

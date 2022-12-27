@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>{{getTitle()}}</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card mode="ios">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <h2>Clínica: <strong *ngIf="dados.clinica">{{dados.clinica.full_address}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card mode="ios">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <h2>Médico: <strong *ngIf="dados.medico">{{dados.medico.nome}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card mode="ios" *ngIf="data.solicitacao">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <h2>Tipo de Solicitação: <strong>{{dados.type == 'ENTREGA' ? 'Entrega de KIT' : 'Coleta de Material'}}</strong>
+        </h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-list *ngIf="data.solicitacao && dados.itens.length > 0">
+    <ion-list-header color="primary">Itens</ion-list-header>
+    <ion-item lines="full" *ngFor="let item of dados.itens; let i = index">
+      <ion-label class="ion-text-wrap">
+        {{item.material}} - {{item.quantidade | number}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="data.devolucao && dados.itens.length > 0">
+    <ion-list-header color="primary">Itens</ion-list-header>
+    <ion-item lines="full" *ngFor="let item of dados.itens; let i = index">
+      <ion-label class="ion-text-wrap">
+        <h2>Material: <strong>{{item.exame_type}}</strong></h2>
+        <h2>Paciente: <strong>{{item.paciente}}</strong></h2>
+        <span>Motivo: {{item.motivo}}</span>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div class="ion-padding">
+    <ion-row>
+      <ion-col>
+        <ion-button color="tertiary" fill="outline" expand="block" (click)="finish(0)">
+          Recusar
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="tertiary" expand="block" (click)="finish(1)">
+          Aceitar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

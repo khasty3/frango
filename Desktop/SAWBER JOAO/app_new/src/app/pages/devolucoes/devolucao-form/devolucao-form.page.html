@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title color="primary">
+      Devolução
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card mode="ios">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <h2>Clínica: <strong *ngIf="dados.clinica">{{dados.clinica.full_address}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card mode="ios">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <h2>Médico: <strong *ngIf="dados.medico">{{dados.medico.nome}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header color="primary">Itens</ion-list-header>
+    <ion-item lines="full" *ngFor="let item of dados.itens; let i = index" (click)="openOptions(item, i)">
+      <ion-label class="ion-text-wrap">
+        <h2>Material: <strong>{{item.exame_type}}</strong></h2>
+        <h2>Paciente: <strong>{{item.paciente}}</strong></h2>
+        <span>Motivo: {{item.motivo}}</span>
+      </ion-label>
+      <div slot="end" class="text-rigth">
+        <ion-icon *ngIf="item.description" name="warning-outline" color="primary"></ion-icon>
+        <ion-icon *ngIf="item.foto" name="camera-outline" color="primary"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <div class="ion-padding">
+    <ion-button color="tertiary" expand="block" (click)="finish()" *ngIf="dados.status != 'FINALIZADO'">
+      Confirmar Devolução
+    </ion-button>
+    <ion-badge color="success" *ngIf="dados.status == 'FINALIZADO'">Concluído</ion-badge>
+  </div>
+  <div class="ion-padding">
+    <ion-button color="danger" expand="block" (click)="naoEntregue()">
+      Não Entregue
+    </ion-button>
+  </div>
+
+
+</ion-content>

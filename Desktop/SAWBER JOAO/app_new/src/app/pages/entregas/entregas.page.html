@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Entregas</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="getEntrega()">
+        <ion-icon slot="icon-only" name="qr-code"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-row class="ion-margin-top">
+
+    <ion-col size="12">
+      <ion-item>
+        <!-- <ion-label position="floating">Pesquisa:</ion-label> -->
+        <ion-input [(ngModel)]="code" placeholder="Informe o código do exame:"></ion-input>
+        <ion-button fill="clear" (click)="searchCode()">
+          <ion-icon slot="icon-only" color="primary" name="search-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-col>
+
+    <!-- <ion-col size="2">
+      <div align="center" button (click)="searchCode()">
+        <ion-icon name="search-circle-outline" color="primary" style="font-size: 2.5rem;"></ion-icon>
+      </div>
+    </ion-col> -->
+
+  </ion-row>
+
+  <ion-list class="ion-margin-top">
+
+    <ion-item mode="ios" lines="full" detail="none" button [routerLink]="[ '/entrega-detalhe/'+entrega.uuid ]"
+      *ngFor="let entrega of entregas">
+      <ion-label class="ion-text-wrap">
+        <h2>Entrega: {{entrega.exame_id}}</h2>
+        <p>{{getAddress(entrega)}}</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+  <div class="ion-padding" align="center" *ngIf="entregas.length == 0">
+    Sem entregas
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openOptions()" color="primary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

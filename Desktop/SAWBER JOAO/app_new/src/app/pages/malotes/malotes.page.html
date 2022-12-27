@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Coleta de malotes</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- <div class="ion-padding" align="center">
+    <strong class="font-md">Coleta de malotes</strong>
+  </div> -->
+
+  <ion-card class="ion-margin-top" mode="ios" (click)="searchClinicas()">
+
+    <ion-item lines="none" button detail>
+      <ion-icon name="location-outline" color="primary" slot="start"></ion-icon>
+      <ion-label class="ion-text-wrap" *ngIf="!clinica.uuid">
+        <h2>Informe a Unidade</h2>
+      </ion-label>
+      <ion-label class="ion-text-wrap" *ngIf="clinica.uuid">
+        <h2>{{ clinica.description | titlecase }}</h2>
+        <p>{{clinica.logradouro}}, Nº {{clinica.numero}}, {{clinica.complemento}}, {{clinica.bairro}},
+          {{clinica.cidade}}</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-card>
+
+  <div class="ion-padding">
+    <ion-row class="ion-margin-top" *ngIf="clinica.uuid">
+
+      <ion-col size="12">
+        <ion-button expand="block" color="tertiary" (click)="startQrCodeScan()">
+          <ion-icon name="qr-code-outline" slot="start"></ion-icon>
+          Ler QR Code
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-button expand="block" color="medium" (click)="codeQRManual()">
+          <ion-icon name="create-outline" slot="start"></ion-icon>
+          Manual
+        </ion-button>
+      </ion-col>
+
+    </ion-row>
+  </div>
+
+</ion-content>

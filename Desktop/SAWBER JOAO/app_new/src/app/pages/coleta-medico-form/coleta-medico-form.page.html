@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Itens da coleta</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card mode="ios">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap" *ngIf="medico.nome">
+        <h2>Médico:</h2>
+        <p>{{ medico.nome | titlecase }}</p>
+      </ion-label>
+      <ion-label class="ion-text-wrap" *ngIf="!medico.nome">
+        {{ medico.nome | titlecase }} <h2>Itens de Ocorrência:</h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header color="primary">
+      <ion-label>Itens</ion-label>
+    </ion-list-header>
+
+    <ion-item lines="full" *ngFor="let item of medico.itens; let i = index">
+      <ion-thumbnail slot="start">
+        <img [src]="item.foto" alt="">
+      </ion-thumbnail>
+      <ion-label>
+        <!-- <h2>{{ medico.nome | titlecase }}</h2> -->
+        <p *ngIf="item.tipo_exame">{{item.tipo_exame.nome}}</p>
+        <p *ngIf="item.description">{{item.description}}</p>
+      </ion-label>
+      <ion-button slot="end" fill="clear" (click)="confirmRemove(item, i)">
+        <ion-icon name="trash" color="danger" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <div class="ion-padding" *ngIf="medico.itens.length > 0">
+    <ion-button expand="block" color="tertiary" (click)="closeModal(true)">
+      Confirmar
+    </ion-button>
+  </div>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="addItem()">
+    <ion-fab-button color="primary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

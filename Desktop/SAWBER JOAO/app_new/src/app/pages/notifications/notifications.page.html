@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Ocorrências</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card mode="ios" *ngFor="let item of notifications" [routerLink]="[ '/notification-detalhe/'+item.coleta_id ]">
+    <ion-item lines="none" detail>
+      <ion-label class="ion-text-wrap">
+        <h2>Clinica: {{item.coleta.clinica.description}}</h2>
+        <span>QR Code: {{item.coleta.code_qr}}</span>
+        <p>Data da coleta: {{ item.coleta.created_at | date:'dd/MM/yyyy' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+</ion-content>

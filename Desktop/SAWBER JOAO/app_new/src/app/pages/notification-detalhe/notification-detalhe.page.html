@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Detalhe da Ocorrência</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card mode="ios">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <span>Clinica: {{coleta.clinica.description}}</span>
+        <p>Data da coleta: {{ coleta.created_at | date:'dd/MM/yyyy' }}</p>
+
+        <!-- <ion-badge color="medium" *ngIf="coleta.status == 1">Pendente</ion-badge>
+        <ion-badge color="warning" *ngIf="coleta.status == 5">Ocorrência</ion-badge>
+        <ion-badge color="success" *ngIf="coleta.status == 10">Verificado</ion-badge> -->
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-list *ngFor="let medico of coleta.medicos">
+    <ion-list-header color="primary">
+      <ion-label>{{medico.nome}}</ion-label>
+    </ion-list-header>
+
+    <ion-item lines="full" *ngFor="let item of medico.itens">
+      <ion-thumbnail slot="start">
+        <img [src]="item.foto">
+      </ion-thumbnail>
+      <ion-label class="ion-text-wrap">
+        <h2>Exame: {{item.tipo_exame}}</h2>
+        <p>Ocorrência: {{item.description}}</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

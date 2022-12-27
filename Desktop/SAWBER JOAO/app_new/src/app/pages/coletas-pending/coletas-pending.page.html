@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+      Coletas Pendentes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+
+    <ion-item line="full" *ngFor="let item of coletas; let i = index;">
+      <ion-label class="ion-text-wrap">
+        <h2>{{ item.clinica | titlecase }}</h2>
+      </ion-label>
+      <ion-button slot="end" fill="clear" (click)="sendColeta(item, i)">
+        <ion-icon name="send-outline" color="tertiary"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+  </ion-list>
+
+  <div class="ion-padding" align="center" *ngIf="coletas.length == 0">
+    Nenhuma coleta pendente
+  </div>
+
+</ion-content>

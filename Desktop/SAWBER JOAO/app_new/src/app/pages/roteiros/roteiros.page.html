@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Roteiros</ion-title>
+  </ion-toolbar>
+  <!-- <ion-toolbar color="primary">
+    <ion-searchbar debounce="500"></ion-searchbar>
+  </ion-toolbar> -->
+</ion-header>
+
+<ion-content>
+  <ion-col size="6">
+
+    <ion-item>
+      <ion-label position="floating">Selecione os dias:</ion-label>
+      <ion-select [(ngModel)]="cucumber"  (ionChange)="updateCucumber()" multiple="true" okText="ok" cancelText="voltar" mode="ios">
+        <ion-select-option value="1">Segunda</ion-select-option>
+        <ion-select-option value="2">Terça</ion-select-option>
+        <ion-select-option value="3">Quarta</ion-select-option>
+        <ion-select-option value="4">Quinta</ion-select-option>
+        <ion-select-option value="5">Sexta</ion-select-option>
+        <ion-select-option value="6">Sábado</ion-select-option>
+        <ion-select-option value="0">Domingo</ion-select-option>
+        <!-- <ion-select-option value="3">Anual</ion-select-option> -->
+      </ion-select>
+    </ion-item>
+  </ion-col>
+ <!-- <ion-card>
+    <ion-item lines="none" mode="ios" (click)="selectRoteiro()" detail>
+      <ion-label *ngIf="!filters.tipo ==1">
+        Selecione o dia do roteiro
+      </ion-label>
+      <ion-label *ngIf="filters.tipo"class="ion-text-wrap">
+        {{data0}}
+        {{data1}}
+        {{data2}}
+        {{data3}}
+        {{data4}} 
+       
+      </ion-label>
+   
+    </ion-item>
+  </ion-card>-->
+
+  <ion-list>
+    <ion-item lines="full" *ngFor="let item of dataSource">
+      <ion-label class="ion-text-wrap">
+        <h2>{{ item.description | titlecase }}</h2>
+        <p>{{item.logradouro}}, Nº {{item.numero}}, {{item.complemento}}, {{item.bairro}}, {{item.cidade}}</p>
+      </ion-label>
+      <ion-button slot="end" fill="clear" (click)="confirmeRemove(item)">
+        <ion-icon name="close-circle-outline" color="danger" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="filters.dias">
+    <ion-fab-button color="primary" (click)="openClinicas()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

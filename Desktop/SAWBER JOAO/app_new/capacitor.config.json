@@ -1,0 +1,6 @@
+{
+	"appId": "br.com.sawber.app",
+	"appName": "Sawber Express",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

@@ -1,0 +1,62 @@
+ion-card-header.ios {
+    display: flex;
+    flex-flow: column-reverse;
+    text-align-last: center;
+
+  }
+  .banner {
+    text-align-last: center;
+    padding: 26px;
+    background: #ff7b00;
+    margin: 5px;
+    top: 12px;
+    border-radius: 23px;
+
+  }
+  .back{
+    background-color: #eee5e500;
+    position: absolute;
+    width: 100%;
+    padding: 10px;
+    bottom: 0px;
+    left: 0;
+    height: 85%;
+    z-index: -20;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    
+  }
+  .back2{
+    background-color: #ffffff;
+    position: absolute;
+    width: 100%;
+    padding: 10px;
+    bottom: 0px;
+    left: 0;
+    height: 99%;
+    z-index: -20;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    
+  }
+  .header{
+    color: white;
+    background-color: #ed740c;
+    padding: 10px;
+    
+
+  }
+  .nomeuser{
+    text-align: center; 
+    color: white;
+}
+ion-card-header.ios {
+    display: flex;
+    flex-flow: column-reverse;
+  }
+
+

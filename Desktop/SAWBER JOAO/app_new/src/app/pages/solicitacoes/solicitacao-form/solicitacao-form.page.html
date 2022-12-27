@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title color="primary">
+      Entrega de Kit
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card mode="ios">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <h2>Clínica: <strong *ngIf="dados.clinica">{{dados.clinica.full_address}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card mode="ios">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <h2>Médico: <strong *ngIf="dados.medico">{{dados.medico.nome}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header color="primary">Itens</ion-list-header>
+    <ion-item lines="full" *ngFor="let item of dados.itens; let i = index" (click)="openOptions(item, i)">
+      <ion-label class="ion-text-wrap">
+        {{item.material}} - {{item.quantidade | number}}
+      </ion-label>
+      <div slot="end" class="text-rigth">
+        <ion-icon *ngIf="item.description" name="warning-outline" color="primary"></ion-icon>
+        <ion-icon *ngIf="item.foto" name="camera-outline" color="primary"></ion-icon>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <div class="ion-padding">
+    <ion-button color="tertiary" expand="block" (click)="finish()">
+      Confirmar Entrega
+    </ion-button>
+  </div>
+  <div class="ion-padding">
+    <ion-button color="danger" expand="block" (click)="naoEntregue()">
+      Não Entregue
+    </ion-button>
+  </div>
+
+</ion-content>

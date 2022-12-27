@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Adicionar item</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="ion-margin-top" align="center">
+    <img [src]="dados.foto ? dados.foto : 'assets/media/no-image.png'" class="img-card" (click)="takePhoto()">
+  </div>
+
+  <ion-row class="ion-margin-top">
+
+    <ion-col size="12" *ngIf="!warning">
+      <ion-item>
+        <ion-label position="floating">Tipo do Exame:</ion-label>
+        <ion-select (ionChange)="changeTipo($event.target)" okText="Confirmar" cancelText="Voltar" mode="ios">
+          <!-- <ion-select-option value="">Selecione o tipo</ion-select-option> -->
+          <ion-select-option *ngFor="let tipo of types" [value]="tipo.uuid">{{tipo.nome | titlecase}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+
+    <!-- <ion-col size="2">
+      <div align="center" button (click)="addTipo()">
+        <ion-icon name="add-circle" color="primary" style="font-size: 2.5rem;"></ion-icon>
+      </div>
+    </ion-col> -->
+
+
+    <ion-col size="12" *ngIf="warning">
+      <ion-item>
+        <!-- <ion-label position="stacked">Motivo da ocorrência</ion-label> -->
+        <ion-textarea mode="ios" rows="6" placeholder="Motivo da ocorrência:" [(ngModel)]="dados.description">
+        </ion-textarea>
+      </ion-item>   
+    </ion-col>
+ 
+  </ion-row>
+
+  <div class="ion-margin-top">
+    <ion-button expand="block" color="tertiary" (click)="confirmItem()">
+      Adicionar
+    </ion-button>
+  </div>
+
+</ion-content>

@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Malote Nº: {{dados.code_qr}}</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card mode="ios">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <strong>{{ clinica.description | titlecase }}</strong>
+        <p>{{clinica.logradouro}}, Nº {{clinica.numero}}, {{clinica.complemento}}, {{clinica.bairro}},
+          {{clinica.cidade}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header color="primary">
+      <ion-label>Setores</ion-label>
+      <!-- <ion-button color="dark">Clear</ion-button> -->
+      <!-- <ion-button (click)="openMedicoSearch()">
+        <ion-icon name="add-circle-outline" color="light" slot="icon-only"></ion-icon>
+      </ion-button> -->
+    </ion-list-header>
+
+    <div *ngFor="let item of setores">
+      <ion-item lines="full" (click)="open(item)" *ngIf="usedItem(item)">
+        <ion-label>
+          <h2>{{ item.titulo | titlecase }}</h2>
+          <!-- <p>CRM: {{medico.crm}}</p> -->
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <ion-list *ngIf="dados.setores.length > 0">
+    <ion-list-header color="primary">
+      <ion-label>Malotes</ion-label>
+    </ion-list-header>
+
+    <ion-item lines="full" *ngFor="let malote of dados.setores; let i = index">
+      <ion-label (click)="open(malote, i)">
+        <h2>{{ malote.titulo | titlecase }}</h2>
+        <!-- <p>CRM: {{malote.crm}}</p> -->
+        <p>Itens no malotes: {{malote.itens.length}}</p>
+      </ion-label>
+      <ion-button slot="end" fill="clear" (click)="confirmRemove(malote, i)">
+        <ion-icon name="trash" color="danger" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <div class="ion-padding">
+    <ion-button expand="block" color="tertiary" (click)="save()">
+      Finalizar Malote
+    </ion-button>
+  </div>
+
+</ion-content>

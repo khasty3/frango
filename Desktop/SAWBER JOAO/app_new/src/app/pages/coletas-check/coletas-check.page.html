@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Lista de Coletas</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="optionSearch()">
+        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card class="ion-margin-top" mode="ios" (click)="searchPortador()">
+
+    <ion-item lines="none" button detail>
+      <ion-icon name="person-outline" color="primary" slot="start"></ion-icon>
+      <ion-label class="ion-text-wrap" *ngIf="!portador.uuid">
+        <h2>Informe o Motoboy</h2>
+      </ion-label>
+      <ion-label class="ion-text-wrap" *ngIf="portador.uuid">
+        <p>Portador:</p>
+        <h2>{{ portador.nome | titlecase }}</h2>
+      </ion-label>
+    </ion-item>
+
+  </ion-card>
+
+  <ion-list>
+
+    <ion-item *ngFor="let coleta of coletas; let i = index" button lines="full"
+      [routerLink]="[ '/coletas-check-detail/'+coleta.uuid ]">
+      <ion-label class="ion-text-wrap">
+        <h2>Código: {{coleta.code_qr}}</h2>
+        <p>
+          Endereço: {{coleta.clinica.logradouro}}, {{coleta.clinica.numero}}, {{coleta.clinica.complemento}},
+          {{coleta.clinica.bairro}}, {{coleta.clinica.cidade}}
+        </p>
+        <span>
+          Status:
+          <ion-badge color="medium" *ngIf="coleta.status == 2">Pendente</ion-badge>
+          <ion-badge color="warning" *ngIf="coleta.status == 5">Ocorrência</ion-badge>
+          <ion-badge color="success" *ngIf="coleta.status == 10">Verificado</ion-badge>
+        </span>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

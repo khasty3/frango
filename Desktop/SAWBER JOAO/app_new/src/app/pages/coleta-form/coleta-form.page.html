@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Coleta Nº: {{dados.code_qr}}</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card mode="ios">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <strong>{{ clinica.description | titlecase }}</strong>
+        <p>{{clinica.logradouro}}, Nº {{clinica.numero}}, {{clinica.complemento}}, {{clinica.bairro}},
+          {{clinica.cidade}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card mode="ios" *ngIf="solicitacao.medico">
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <strong>Médico da solicitação:</strong>
+        <p>{{solicitacao.medico.nome}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header color="primary">
+      <ion-label>Médicos</ion-label>
+      <!-- <ion-button color="dark">Clear</ion-button> -->
+      <ion-button (click)="openMedicoSearch()">
+        <ion-icon name="add-circle-outline" color="light" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-list-header>
+
+    <div *ngFor="let medico of clinica.medicos">
+      <ion-item lines="full" (click)="openColeta(medico)" *ngIf="usedMedical(medico)">
+        <ion-label>
+          <h2>{{ medico.nome | titlecase }}</h2>
+          <p>CRM: {{medico.crm}}</p>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <ion-list *ngIf="dados.medicos.length > 0">
+    <ion-list-header color="primary">
+      <ion-label>Coletas</ion-label>
+    </ion-list-header>
+
+    <ion-item lines="full" *ngFor="let coleta of dados.medicos; let i = index">
+      <ion-label (click)="openColeta(coleta, i)">
+        <h2>{{ coleta.nome | titlecase }}</h2>
+        <p>CRM: {{coleta.crm}}</p>
+        <p>Itens Coletados: {{coleta.itens.length}}</p>
+      </ion-label>
+      <!-- <ion-button slot="end" fill="clear" (click)="confirmRemove(coleta, i)">
+        <ion-icon name="trash" color="danger" slot="icon-only"></ion-icon>
+      </ion-button> -->
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header color="primary">
+      <ion-label>Ocorrências</ion-label>
+      <ion-button (click)="openColeta()">
+        <ion-icon name="add-circle-outline" color="light" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-list-header>
+
+    <ion-item lines="full" *ngIf="dados.warning">
+      <ion-label (click)="openColeta(dados.warning)">
+        <h2>Itens com ocorrência</h2>
+        <p>Itens Coletados: {{dados.warning.itens.length}}</p>
+      </ion-label>
+    <!--<ion-button slot="end" fill="clear" (click)="confirmRemove(dados.warning)">
+        <ion-icon name="trash" color="danger" slot="icon-only"></ion-icon>
+      </ion-button> -->
+    </ion-item>
+  </ion-list>
+
+  <div class="ion-padding">
+    <ion-button expand="block" color="tertiary" (click)="saveColeta()">
+      Finalizar Coleta
+    </ion-button>
+  </div>
+
+</ion-content>

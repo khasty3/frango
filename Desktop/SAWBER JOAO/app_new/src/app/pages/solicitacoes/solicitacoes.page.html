@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title color="primary">
+      Solicitações
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-list>
+
+    <ion-item button lines="full" *ngFor="let item of solicitacoes" (click)="openSolicitacao(item)">
+      <ion-label class="ion-text-wrap">
+        <h2># <strong>{{ item.id }}</strong></h2>
+        <h2>Endereço: <strong>{{ item.clinica.full_address }}</strong></h2>
+        <h2>Médico: <strong>{{ item.medico.nome | titlecase }}</strong></h2>
+        
+        <h2 *ngIf="item.descricao" style="
+        border: solid 1px #b3b3b3;
+        border-radius: 12px;
+        padding: 12px;
+    " >Obs: <strong>{{ item.descricao | titlecase }}</strong></h2>
+        <ion-row>
+          <ion-col size="6">
+            <ion-badge color="medium">{{item.status}}</ion-badge>
+          </ion-col>
+
+          <ion-col size="6" class="text-right">
+            <p>{{ item.agendamento | date: 'dd/MM/yyyy' }}</p>
+          </ion-col>
+
+          <ion-col size="6">
+            <p>{{item.type == 'ENTREGA' ? 'Entrega de Kit' : 'Coleta de Material'}}</p>
+          </ion-col>
+
+          <ion-col size="6" class="text-right">
+            <ion-badge color="secondary" *ngIf="item.prioridade == 'ROTINA'">{{item.prioridade}}</ion-badge>
+            <ion-badge color="primary" *ngIf="item.prioridade == 'URGENTE'">{{item.prioridade}}</ion-badge>
+          </ion-col>
+          <ion-col size="6" class="text-right" *ngIf="!item.portador_accepted && item.prioridade == 'URGENTE'">
+            <ion-badge color="secondary">Pendente de confirmação</ion-badge>
+          </ion-col>
+
+        </ion-row>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

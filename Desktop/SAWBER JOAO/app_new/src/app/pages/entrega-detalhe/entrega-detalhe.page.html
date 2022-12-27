@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Detalhes da Entrega</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card mode="ios">
+
+    <ion-card-header>
+      <ion-card-subtitle>Exame:</ion-card-subtitle>
+      <ion-card-title>{{dados.exame_id}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-row>
+
+        <ion-col size="12">
+          Nome:<strong> {{dados.exame.nome}}</strong>
+        </ion-col>
+
+        <ion-col size="12">
+          Endereço:<strong> {{getAddress()}}</strong>
+        </ion-col>
+
+        <ion-col size="12">
+          Observações:<strong> {{dados.exame.obs}}</strong>
+        </ion-col>
+
+        <ion-col size="12">
+          Contato:
+          <br>
+          <strong *ngIf="dados.exame.telefone"><a href="tel:{{dados.exame.telefone}}"> {{dados.exame.telefone}}</a></strong>
+          <br>
+          <strong *ngIf="dados.exame.telefone_secondary"><a href="tel:{{dados.exame.telefone_secondary}}">
+              {{dados.exame.telefone_secondary}}</a></strong>
+        </ion-col>
+
+        <ion-col size="12" *ngIf="dados.exame.tipo_pagamento == 2">
+          À Receber:<strong class="text-danger"> {{ dados.exame.valor | currency: 'R$' }}</strong>
+        </ion-col>
+
+        <ion-col size="12" *ngIf="dados.status == 10">
+          Data da Entrega:<strong> {{ dados.updated_at | date: 'dd/MM/yyy HH:mm' }}</strong>
+        </ion-col>
+
+
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- <ion-list mode="md">
+    <ion-list-header color="primary">
+      <ion-label>Pendências da entrega</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let pend of dados.pendencias">
+      <ion-label>
+        <h2>Motivo: <strong> {{pend.description}}</strong></h2>
+
+        <p>Data da Ocorrência: {{ pend.data_tentativa | date: 'dd/MM/yyyy HH:mm' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list> -->
+
+
+  <div class="ion-margin-top" align="center">
+    <img [src]="dados.foto" class="img-card" *ngIf="dados.foto" (click)="getPhoto()">
+    <img [src]="dados.signature" class="img-card" *ngIf="dados.signature" (click)="getSignature()">
+  </div>
+  <div class="ion-margin-top" align="center" *ngIf="dados.recptor">
+    <strong>Recebedor: {{dados.recptor}}</strong>
+  </div>
+
+  <div class="ion-padding" align="center">
+
+    <ion-badge color="medium" *ngIf="dados.status == 1">Pendente</ion-badge>
+    <!-- <ion-badge color="warning" *ngIf="dados.status == 5">Ocorrência</ion-badge> -->
+    <ion-badge color="success" *ngIf="dados.status == 10">Entregue</ion-badge>
+
+    <ion-button class="ion-margin-top" expand="block" color="tertiary" (click)="confirm()" *ngIf="dados.status != 10">
+      Entregar
+    </ion-button>
+
+    <ion-button class="ion-margin-top" expand="block" color="warning" (click)="openReport()" *ngIf="dados.status != 10">
+      Gerar Ocorrência
+    </ion-button>
+  </div>
+
+</ion-content>

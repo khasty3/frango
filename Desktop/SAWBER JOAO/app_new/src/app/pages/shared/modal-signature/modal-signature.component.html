@@ -1,0 +1,25 @@
+<ion-header id="header-signature">
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      Assinatura
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="light" expand="full" (click)="clear()"> Limpar</ion-button>
+      <ion-button color="light" expand="full" (click)="save()"> Confirmar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+  <canvas class="signature-pad-canvas" #canvas width="900" height="400" style="touch-action: none;"></canvas>
+</ion-content>

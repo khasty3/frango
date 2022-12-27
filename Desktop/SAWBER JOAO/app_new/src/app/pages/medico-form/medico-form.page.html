@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      Cadastrar Médico
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+
+
+  <form #form="ngForm" (ngSubmit)="submit(form)">
+
+    <ion-item class="ion-margin-top">
+      <ion-label position="floating">Nome do Médico:</ion-label>
+      <ion-input type="text" required [(ngModel)]="dados.nome" name="nome"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-top">
+      <ion-label position="floating">CRM do Médico:</ion-label>
+      <ion-input type="tel" required [(ngModel)]="dados.crm" name="nome"></ion-input>
+    </ion-item>
+
+    <div class="ion-margin-top">
+      <ion-button expand="block" color="tertiary" type="submit">Cadastrar</ion-button>
+    </div>
+
+  </form>
+
+</ion-content>

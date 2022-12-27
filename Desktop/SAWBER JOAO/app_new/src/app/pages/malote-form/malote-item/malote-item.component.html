@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Adicionar item</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="ion-margin-top" align="center">
+    <img [src]="dados.foto ? dados.foto : 'assets/media/no-image.png'" class="img-card" (click)="takePhoto()">
+  </div>
+
+
+  <div class="ion-margin-top">
+    <ion-button expand="block" color="tertiary" (click)="confirmItem()">
+      Adicionar
+    </ion-button>
+  </div>
+
+</ion-content>

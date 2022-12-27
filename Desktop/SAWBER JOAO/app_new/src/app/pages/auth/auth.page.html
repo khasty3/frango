@@ -1,0 +1,37 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>auth</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-padding" color="primary">
+
+  <div class="ion-margin-top" align="center">
+
+    <img src="assets/media/logo.png">
+
+  </div>
+
+  <div class="ion-margin-top">
+
+    <ion-item>
+      <!-- <ion-label position="floating">Digite seu CPF:</ion-label> -->
+      <ion-input type="tel" placeholder="Digite seu CPF:" [(ngModel)]="dados.login"></ion-input>
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+    </ion-item>
+
+  </div>
+
+  <div class="ion-margin-top">
+    <ion-item>
+      <!-- <ion-label position="floating">Digite seu CPF:</ion-label> -->
+      <ion-input type="password" placeholder="Digite sua senha:" [(ngModel)]="dados.password"></ion-input>
+      <ion-icon name="key-outline" slot="start"></ion-icon>
+    </ion-item>
+  </div>
+
+  <div class="ion-margin-top">
+    <ion-button expand="block" color="tertiary" (click)="login()">Acessar</ion-button>
+  </div>
+
+</ion-content>

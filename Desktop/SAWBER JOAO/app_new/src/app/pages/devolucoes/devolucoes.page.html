@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="primary"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title color="primary">
+      Devoluções
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-list>
+
+    <ion-item button lines="full" *ngFor="let item of devolucoes" (click)="openForm(item)">
+      <ion-label class="ion-text-wrap">
+        <h2># <strong>{{ item.id }}</strong></h2>
+        <h2>Endereço: <strong>{{ item.clinica.full_address | titlecase }}</strong></h2>
+        <h2>Médico: <strong>{{ item.medico.nome | titlecase }}</strong></h2>
+        <ion-row>
+          <ion-col size="6">
+            <ion-badge color="dark">{{item.status}}</ion-badge>
+          </ion-col>
+
+          <ion-col size="6" class="text-right">
+            <p>{{ item.agendamento | date: 'dd/MM/yyyy' }}</p>
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-badge color="secondary" *ngIf="item.prioridade == 'ROTINA'">{{item.prioridade}}</ion-badge>
+            <ion-badge color="primary" *ngIf="item.prioridade == 'URGENTE'">{{item.prioridade}}</ion-badge>
+          </ion-col>
+
+          <ion-col size="6" class="text-right" *ngIf="!item.portador_accepted && item.prioridade == 'URGENTE'">
+            <ion-badge color="medium">Pendente de confirmação</ion-badge>
+          </ion-col>
+
+        </ion-row>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
